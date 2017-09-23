@@ -6,13 +6,19 @@ import {
 } from 'redux-saga/effects'
 
 // internal
-import { ModelTypes } from '../redux/models'
+import ModelActions, { ModelTypes } from '../redux/models'
 
 function * handleSubmit(api, action) {
-  yield call(api.submitModel, action.code)
-  console.log(action, "THE ACTION I GOT", api)
+  yield call(api.saveModel, action.code, 'testName')
 }
 
-export default function * flow (api) {
-  yield takeEvery(ModelTypes.SUBMIT_MODEL, handleSubmit, api)
+function * handleFetch(api) {
+  const models = yield call(api.list)
+  console.log('GOT THE MODELS', models)
+  yield put(ModelActions.fetchSuccess({ models }))
+}
+
+export default function * flow(api) {
+  yield takeEvery(ModelTypes.SAVE_MODEL, handleSubmit, api)
+  yield takeEvery(ModelTypes.FETCH_MODELS, handleFetch, api)
 }

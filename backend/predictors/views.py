@@ -18,12 +18,18 @@ def saveModel(request):
     try:
         data = json.loads(request.body)
         code = str(data["code"])
-        modelName = str(data["modelName"])
+        name = str(data["modelName"])
     except Exception as e:
         return HttpResponseBadRequest("Invalid submit request")
 
     model, created = PredictionModel.objects.get_or_create(name=name)
     model.code = code
+    model.save()
+    return JsonResponse({})
+
+def rename(request, name=None, newName=None):
+    model = get_object_or_404(PredictionModel, name=name)
+    model.name = newName
     model.save()
     return JsonResponse({})
 
@@ -41,11 +47,16 @@ def trainModel(request, name=None):
 def predict(request):
     try:
         data = json.loads(request.body)
-        modelName = str(data["modelName"])
+        name = str(data["modelName"])
         dataset = data["trainingSet"]
     except Exception as e:
-        return HttpResponseBadRequest("Invalid submit request")
+        return HttpResponseBadRequest("Invalid prediction request")
 
     model = get_object_or_404(PredictionModel.objects, name=name)
     model.predict(dataset)
     return JsonResponse({})
+
+def listModels(request):
+    models = PredictionModel.objects.all()
+    serializedModels = [{"name": model.name, "code": model.code} for model in models]
+    return JsonResponse({"models": serializedModels})

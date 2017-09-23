@@ -10,8 +10,11 @@ import './Home.scss'
 
 export default class Home extends Component {
 
+  componentDidMount() {
+    this.props.fetchModels()
+  }
+
   render() {
-    console.log(this.props, "MY PROPS", this.props.submitModel)
     return (
       <div>
         <Court
@@ -20,10 +23,16 @@ export default class Home extends Component {
           val={100}
         />
         <ModelInput
-          submitModel={this.props.submitModel}
+          saveModel={this.props.saveModel}
+          updateCode={this.props.updateCode}
+          code={this.props.code}
         />
       </div>
     )
   }
 }
 
+Home.propTypes = {
+  fetchModels: PropTypes.func.isRequired,
+  saveModel: PropTypes.func.isRequired,
+}

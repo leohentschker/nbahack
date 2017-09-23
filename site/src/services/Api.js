@@ -20,18 +20,24 @@ const create = (baseURL = base) => {
     timeout: 10000,
   })
 
-  const save = (modelCode) =>
+  const saveModel = (modelCode, modelName) =>
     api.post('model/save/', {
       code: modelCode,
-      modelName: 'testName',
+      modelName,
     })
+      .then(resp => resp.data)
+
+  const list = (modelCode, modelName) =>
+    api.get(`model/`)
       .then(resp => resp.data)
 
   const get = (modelCode, modelName) =>
     api.get(`model/${modelName}`)
+      .then(resp => resp.data)
 
   return {
-    save,
+    saveModel,
+    list,
     get,
   }
 }

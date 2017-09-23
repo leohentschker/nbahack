@@ -10,34 +10,8 @@ import 'brace/theme/monokai'
 
 import './ModelInput.scss'
 
-const DEFAULT_CODE = `
-class Model:
-  """
-  Write your code here!
-  """
-
-  def train(self, dataframe):
-    """
-    Takes in dataframe containing all
-    of the relevant data we will need
-    """
-
-  def predict(self, data):
-    """
-    Takes in the data for an upcoming game
-    and makes a guess as to the value
-    """
-`
 
 export default class ModelInput extends Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      modelCode: DEFAULT_CODE,
-    }
-  }
 
   render() {
     return (
@@ -45,7 +19,7 @@ export default class ModelInput extends Component {
         <div id="editor" />
         <div
           className="submit-button"
-          onClick={() => this.props.submitModel(this.state.modelCode)}
+          onClick={() => this.props.saveModel(this.state.modelCode)}
         >
           WHAT IS GOOD
         </div>
@@ -54,12 +28,12 @@ export default class ModelInput extends Component {
           theme="monokai"
           name="editor"
           onLoad={this.onLoad}
-          onChange={code => this.setState({modelCode: code})}
+          onChange={code => this.props.updateCode(code)}
           fontSize={14}
           showPrintMargin={true}
           showGutter={true}
           highlightActiveLine={true}
-          value={this.state.modelCode}
+          value={this.props.code}
           setOptions={{
             showLineNumbers: true,
             tabSize: 4,
@@ -71,5 +45,6 @@ export default class ModelInput extends Component {
 }
 
 ModelInput.propTypes = {
-  submitModel: PropTypes.func.isRequired,
+  updateCode: PropTypes.func.isRequired,
+  saveModel: PropTypes.func.isRequired,
 }
