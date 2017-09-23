@@ -3,7 +3,7 @@ import locationReducer from './location'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-    games: require('../redux/games').reducer,
+    games: require('../redux/models').reducer,
     location: locationReducer,
     ...asyncReducers
   })

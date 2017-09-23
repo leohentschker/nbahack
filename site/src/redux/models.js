@@ -3,23 +3,30 @@ import Immutable from 'seamless-immutable'
 
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
-  getGames: ['date'],
+  submitModel: ['code'],
+  modelError: ['error'],
+  submitSuccess: [],
 })
 
-export const ApiTypes = Types
+export const ModelTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE = Immutable({
-  querying: false,
+  submitting: false,
+  error: null,
 })
 
 /* ------------- Reducer ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
 
   // when we successfully get the teammate
-  [Types.GET_GAMES]: (state, { reservation }) => {
-    console.log("I AM GETTING THE GAMES")
-    return state.merge({querying: true})
-  }
+  [Types.SUBMIT_MODEL]: () =>
+    INITIAL_STATE.merge({ submitting: true }),
+
+  [Types.MODEL_ERROR]: (state, { error }) =>
+    INITIAL_STATE.merge({ error }),
+
+  [Types.SUBMIT_SUCCESS]: () =>
+    INITIAL_STATE,
 })

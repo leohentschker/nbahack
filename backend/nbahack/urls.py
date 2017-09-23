@@ -15,10 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.decorators.csrf import csrf_exempt
 
 import views
+from predictors.views import (
+	trainModel,
+	saveModel,
+	getModel,
+)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^games/', views.games),
+    url(r'^model/save/', csrf_exempt(saveModel)),
+    url(r'^model/(?P<name>\w{0,50})/$', csrf_exempt(getModel)),
+    url(r'^model/train/(?P<name>\w{0,50})/$', trainModel),
 ]

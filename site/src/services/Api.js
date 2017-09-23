@@ -1,7 +1,7 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
 
-const base = 'asdasd.com'
+const base = 'http://localhost:8000'
 
 // our "constructor"
 const create = (baseURL = base) => {
@@ -17,20 +17,26 @@ const create = (baseURL = base) => {
     // here are some default headers
     headers: {},
     // 10 second timeout...
-    timeout: 10000
+    timeout: 10000,
   })
 
-  const getData = () =>
-    api.post('wat', {
+  const save = (modelCode) =>
+    api.post('model/save/', {
+      code: modelCode,
+      modelName: 'testName',
     })
       .then(resp => resp.data)
 
+  const get = (modelCode, modelName) =>
+    api.get(`model/${modelName}`)
+
   return {
-    getData,
+    save,
+    get,
   }
 }
 
 // let's return back our create method as the default.
 export default {
-  create
+  create,
 }
