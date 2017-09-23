@@ -1,0 +1,18 @@
+#editor-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-left: 30px;
+	margin-right: 30px;
+
+	#editor {
+		width: 100% !important;
+
+		.ace_print-margin {
+			display: none;
+		}
+
+		.ace_gutter {
+			border-radius: 15px 0 0 15px;
+		}
+	}
+}

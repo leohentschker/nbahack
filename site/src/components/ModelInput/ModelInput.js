@@ -1,50 +1,47 @@
 // external
 import React, { Component } from 'react'
-import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
-import AceEditor from 'react-ace'
 
-import brace from 'brace'
-import 'brace/mode/python'
-import 'brace/theme/monokai'
+import BottomButtons from './BottomButtons'
+import TopButtons from './TopButtons'
+import Editor from './Editor'
 
 import './ModelInput.scss'
-
 
 export default class ModelInput extends Component {
 
   render() {
     return (
       <div id="model-input">
+        <TopButtons
+          models={this.props.models}
+          activeModel={this.props.activeModel}
+          selectModel={this.props.selectModel}
+          newModel={this.props.newModel}
+          datasets={this.props.datasets}
+          activeDataset={this.props.activeDataset}
+          selectDataset={this.props.selectDataset}
+        />
         <div id="editor" />
+        <Editor
+          updateCode={this.props.updateCode}
+          code={this.props.code}
+        />
         <div
           className="submit-button"
           onClick={() => this.props.saveModel(this.state.modelCode)}
         >
           WHAT IS GOOD
         </div>
-        <AceEditor
-          mode="python"
-          theme="monokai"
-          name="editor"
-          onLoad={this.onLoad}
-          onChange={code => this.props.updateCode(code)}
-          fontSize={14}
-          showPrintMargin={true}
-          showGutter={true}
-          highlightActiveLine={true}
-          value={this.props.code}
-          setOptions={{
-            showLineNumbers: true,
-            tabSize: 4,
-          }}
-        />
+        <BottomButtons />
       </div>
     )
   }
 }
 
 ModelInput.propTypes = {
+  selectModel: PropTypes.func.isRequired,
   updateCode: PropTypes.func.isRequired,
   saveModel: PropTypes.func.isRequired,
+  newModel: PropTypes.func.isRequired,
 }

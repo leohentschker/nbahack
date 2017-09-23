@@ -14,8 +14,9 @@ function * handleSubmit(api, action) {
 
 function * handleFetch(api) {
   const models = yield call(api.list)
-  console.log('GOT THE MODELS', models)
-  yield put(ModelActions.fetchSuccess({ models }))
+  yield put(ModelActions.fetchSuccess(models))
+
+  yield put(ModelActions.selectModel(models[0]))
 }
 
 export default function * flow(api) {

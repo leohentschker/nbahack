@@ -26,6 +26,7 @@ const { Types, Creators } = createActions({
   updateCode: ['code'],
 
   selectModel: ['activeModel'],
+  newModel: ['name'],
 
   saveModel: ['code', 'modelName'],
   saveSuccess: [],
@@ -46,6 +47,7 @@ const INITIAL_STATE = Immutable({
   saving: false,
   training: false,
   models: [],
+  datasets: [],
   codeError: null,
   code: DEFAULT_CODE,
 })
@@ -59,10 +61,22 @@ export const reducer = createReducer(INITIAL_STATE, {
     state.merge({ fetching: true }),
 
   [Types.FETCH_SUCCESS]: (state, { models }) =>
-    state.merge({ fetching: false, models }),
+    state.merge({ models }),
 
   [Types.SELECT_MODEL]: (state, { activeModel }) =>
     state.merge({ activeModel }),
+
+  [Types.NEW_MODEL]: (state, { name }) => {
+    const newModel = {
+      parameterJSON: '',
+      code: '',
+      name,
+      id: Math.round(Math.random() * 100000),
+    }
+    return state.merge({
+      models: [newModel].concat(state.models),
+    })
+  },
 
   [Types.SAVE_MODEL]: state =>
     state.merge({ saving: true }),

@@ -2,6 +2,7 @@ import { takeLatest, fork } from 'redux-saga/effects'
 
 /* ------------- Sagas ------------- */
 import modelSaga from './ModelSaga'
+import datasetSaga from './DatasetSaga'
 
 /* ------------- Services ------------- */
 import Api from '../services/Api'
@@ -12,5 +13,7 @@ export default function * root () {
   yield [
     // startup saga
     fork(modelSaga, api),
+
+    fork(datasetSaga, api),
   ]
 }

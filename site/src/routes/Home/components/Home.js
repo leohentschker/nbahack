@@ -5,28 +5,34 @@ import FontAwesome from 'react-fontawesome'
 
 // internal
 import ModelInput from '../../../components/ModelInput/'
-import Court from '../../../components/Court'
+import RankingTable from '../../../components/RankingTable/'
+import Schedule from '../../../components/Schedule/'
 import './Home.scss'
 
 export default class Home extends Component {
 
   componentDidMount() {
     this.props.fetchModels()
+    this.props.fetchDatasets()
   }
 
   render() {
     return (
       <div>
-        <Court
-          team1="OKC"
-          team2="NYK"
-          val={100}
-        />
         <ModelInput
           saveModel={this.props.saveModel}
+          activeDataset={this.props.activeDataset}
+          datasets={this.props.datasets}
           updateCode={this.props.updateCode}
           code={this.props.code}
+          models={this.props.models}
+          activeModel={this.props.activeModel}
+          selectModel={this.props.selectModel}
+          newModel={this.props.newModel}
+          selectDataset={this.props.selectDataset}
         />
+        <RankingTable />
+        <Schedule />
       </div>
     )
   }

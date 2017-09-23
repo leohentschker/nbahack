@@ -58,5 +58,5 @@ def predict(request):
 
 def listModels(request):
     models = PredictionModel.objects.all()
-    serializedModels = [{"name": model.name, "code": model.code} for model in models]
+    serializedModels = [{"name": model.name, "code": model.code, "id": model.id} for model in models]
     return JsonResponse({"models": serializedModels})
