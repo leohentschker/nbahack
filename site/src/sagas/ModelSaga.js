@@ -34,22 +34,15 @@ function * handleTrain(api, action) {
       break
     } else {
       const percentage = (progress / (progress + 5.0)) * 100
-      console.log(percentage, 'THE PRECENTER')
       yield put(ModelActions.updateProgress(percentage))
-      console.log("I GET HUR")
       progress += 1.01
     }
     yield call(waitSeconds, 1000)
   }
 }
 
-function * handlePredict(api, { modelName, dataset }) {
-  yield call(api.predictModel, modelName, dataset)
-}
-
 export default function * flow(api) {
   yield takeEvery(ModelTypes.SAVE_MODEL, handleSave, api)
   yield takeEvery(ModelTypes.FETCH_MODELS, handleFetch, api)
   yield takeEvery(ModelTypes.TRAIN_MODEL, handleTrain, api)
-  yield takeEvery(ModelTypes.PREDICT_MODEL, handlePredict, api)
 }

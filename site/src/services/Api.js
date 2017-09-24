@@ -49,11 +49,24 @@ const create = (baseURL = base) => {
     api.get(`model/${modelName}/`)
       .then(resp => resp.data)
 
+  const fetchPrediction = (modelName, dataset) =>
+    api.post('prediction/', {
+      modelName,
+      dataset,
+    })
+      .then(resp => {
+        if (!resp.ok) {
+          return null
+        }
+        return resp.data
+      })
+
   const listDatasets = () =>
     api.get('datasets/')
       .then(resp => resp.data.datasets)
 
   return {
+    fetchPrediction,
     listDatasets,
     predictModel,
     trainModel,

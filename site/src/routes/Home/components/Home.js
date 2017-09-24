@@ -21,7 +21,7 @@ export default class Home extends Component {
     return (
       <div>
         <Modal 
-            visible={this.props.training}
+            visible={this.props.training || this.props.predicting}
             width="785"
             height="350"
             effect="fadeInUp"
@@ -29,6 +29,7 @@ export default class Home extends Component {
           <TrainingAnimation
             visible={this.props.visible}
             trainingProgress={this.props.trainingProgress}
+            title={this.props.training ? "Training..." : "Predicting..."}
           />
         </Modal>
         <div className="logo-header">

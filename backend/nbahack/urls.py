@@ -24,6 +24,7 @@ from predictors.views import (
 	saveModel,
 	getModel,
     listModels,
+    fetchPrediction,
 )
 
 from datasets.views import (
@@ -40,4 +41,6 @@ urlpatterns = [
     url(r'^model/(?P<name>\w{0,50})/$', csrf_exempt(getModel)),
 
     url(r'^datasets/$', csrf_exempt(listDatasets)),
+
+    url(r'^prediction/$', csrf_exempt(fetchPrediction)),
 ]

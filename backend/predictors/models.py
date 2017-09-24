@@ -48,14 +48,27 @@ class PredictionModel(models.Model):
         self.save()
 
     def train_async(self, dataset):
-        command = "cd /Users/leohentschker/nbahack/backend && /usr/bin/python manage.py train_model " + str(self.id) + " " + str(dataset.id)
+        command = "cd /Users/leohentschker/nbahack/backend && /usr/bin/python manage.py train_model " + str(self.id) + " " + str(dataset.id) + " &"
         os.system(command)
 
     def predict(self, dataset):
-    	return self.model.predict(dataset.dataframe)
+        output = self.model.predict(dataset.dataframe)
+        prediction = Prediction.objects.get(model=self, dataset=dataset)
+        prediction.results = output
+        prediction.complete = True
+        prediction.save()
+        self.save()
+
+    def predict_async(self, dataset):
+        prediction = Prediction.objects.get(model=self, dataset=dataset)
+        prediction.complete = False
+        self.save()
+        command = "cd /Users/leohentschker/nbahack/backend && /usr/bin/python manage.py predict_model " + str(self.id) + " " + str(dataset.id) + " &"
+        os.system(command)
 
 
 class Prediction(models.Model):
-	dataset = models.ForeignKey(Dataset)
-	model = models.ForeignKey(PredictionModel)
-	results = models.TextField(null=True)
+    dataset = models.ForeignKey(Dataset)
+    model = models.ForeignKey(PredictionModel)
+    results = models.TextField(null=True)
+    complete = models.BooleanField(default=False)

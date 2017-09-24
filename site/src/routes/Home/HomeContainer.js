@@ -30,6 +30,8 @@ const mapStateToProps = state => ({
   models: state.data.models,
   code: state.data.code,
 
+  predicting: state.data.predicting,
+
   prediction: state.predictions.prediction,
 })
 
