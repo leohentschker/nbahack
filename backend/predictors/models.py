@@ -46,8 +46,10 @@ class PredictionModel(models.Model):
         self.parameterJSON = json.dumps(parameters)
         self.trained = True
         self.save()
-        import time
-        time.sleep(10)
+
+    def train_async(self, dataset):
+        command = "cd /Users/leohentschker/nbahack/backend && /usr/bin/python manage.py train_model " + str(self.id) + " " + str(dataset.id)
+        os.system(command)
 
     def predict(self, dataset):
     	return self.model.predict(dataset.dataframe)

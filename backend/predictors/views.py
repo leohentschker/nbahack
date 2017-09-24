@@ -53,7 +53,9 @@ def trainModel(request):
 
     model = get_object_or_404(PredictionModel, name=name)
     dataset = get_object_or_404(Dataset, name=datasetName)
-    model.train(dataset)
+    model.trained = False
+    model.save()
+    model.train_async(dataset)
     return JsonResponse({})
 
 def predict(request):

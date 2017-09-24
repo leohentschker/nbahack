@@ -43,7 +43,6 @@ const EmptyTable = () => (
 )
 
 const RankingTable = (props) => {
-  console.log(props, "PROPS ON RANKING TABLE")
   if (props.prediction) {
     return <DataFilledTable {...props} />
   } else {

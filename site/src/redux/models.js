@@ -57,6 +57,7 @@ const INITIAL_STATE = Immutable({
   activeModel: null,
   saving: false,
   training: false,
+  trainingProgress: 1.01,
   models: [],
   datasets: [],
   codeError: null,
