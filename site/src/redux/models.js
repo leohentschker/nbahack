@@ -35,6 +35,8 @@ const { Types, Creators } = createActions({
   trainModel: ['modelName', 'dataset'],
   trainSuccess: [],
 
+  predictModel: ['modelName', 'dataset'],
+
   codeError: ['codeError'],
   success: [],
 })
@@ -78,6 +80,8 @@ export const reducer = createReducer(INITIAL_STATE, {
       models: [newModel].concat(state.models),
     })
   },
+
+  [Types.PREDICT_MODEL]: state => state,
 
   [Types.SAVE_MODEL]: state =>
     state.merge({ saving: true }),

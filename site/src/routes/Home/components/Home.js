@@ -19,9 +19,13 @@ export default class Home extends Component {
   render() {
     return (
       <div>
+        <div className="logo-header">
+          <img src="/ISE.png" />
+        </div>
         <ModelInput
           saveModel={this.props.saveModel}
           trainModel={this.props.trainModel}
+          predictModel={this.props.predictModel}
           activeDataset={this.props.activeDataset}
           datasets={this.props.datasets}
           updateCode={this.props.updateCode}
@@ -32,7 +36,9 @@ export default class Home extends Component {
           newModel={this.props.newModel}
           selectDataset={this.props.selectDataset}
         />
-        <RankingTable />
+        <RankingTable
+          predictions={this.props.predictions}
+        />
         <Schedule />
       </div>
     )

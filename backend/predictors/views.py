@@ -47,9 +47,11 @@ def trainModel(request):
         datasetName = str(data["dataset"])
     except Exception as e:
         return HttpResponseBadRequest("Invalid prediction request")
+
     model = get_object_or_404(PredictionModel, name=name)
     dataset = get_object_or_404(Dataset, name=datasetName)
     parameters = model.train(dataset)
+
     model.parameterJSON = json.dumps(parameters)
     model.trained = True
     model.save()
