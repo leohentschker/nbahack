@@ -25,7 +25,6 @@ const TEAMS = [
   'SAC',
   'CHA',
   'DEN',
-  'ISE',
   'MIL',
   'ORL',
   'SAS',
@@ -52,10 +51,7 @@ const TeamAnimation = ({ team1, team2, val, expected }) => (
   </div>
 )
 
-const ProgressBar = ({ startTime }) => {
-  const diff = (new Date()).getTime() - startTime
-  const percent = 1.0 - (1.0 / diff)
-
+const ProgressBar = ({ progress }) => {
   return (
     <div style={{
       'margin-left': '30px',
@@ -63,7 +59,7 @@ const ProgressBar = ({ startTime }) => {
       height: '20px',
     }}>
       <div style={{
-        width: `${parseInt(percent)}%`,
+        width: `${parseInt(progress)}%`,
         background: '#3FCAC8',
         height: '100%',
       }} />
@@ -102,6 +98,7 @@ export default class TrainingAnimation extends Component {
   }
 
   render() {
+    console.log(this.props.trainingProgress, "THE PPPOP")
     return (
       <div id="court-animation">
         <div className="image-wrapper">
@@ -120,7 +117,7 @@ export default class TrainingAnimation extends Component {
             )
           }
         </div>
-         <ProgressBar startTime={this.props.trainingProgress} />
+         <ProgressBar progress={this.props.trainingProgress} />
       </div>
     )
   }

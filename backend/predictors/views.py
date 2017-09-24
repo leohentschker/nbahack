@@ -41,7 +41,7 @@ def rename(request, name=None, newName=None):
 
 def getModel(request, name=None):
     model = get_object_or_404(PredictionModel, name=name)
-    return JsonResponse({"code": model.code})
+    return JsonResponse({"code": model.code, "trained": model.trained})
 
 def trainModel(request):
     try:

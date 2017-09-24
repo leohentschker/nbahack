@@ -45,8 +45,8 @@ const create = (baseURL = base) => {
     api.get(`model/`)
       .then(resp => resp.data.models)
 
-  const get = (modelCode, modelName) =>
-    api.get(`model/${modelName}`)
+  const get = (modelName) =>
+    api.get(`model/${modelName}/`)
       .then(resp => resp.data)
 
   const listDatasets = () =>

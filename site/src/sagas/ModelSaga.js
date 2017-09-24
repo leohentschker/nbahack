@@ -19,8 +19,28 @@ function * handleFetch(api) {
   yield put(ModelActions.selectModel(models[0]))
 }
 
-function * handleTrain(api, { modelName, dataset }) {
-  yield call(api.trainModel, modelName, dataset)
+function* waitSeconds(ms, result=true) {
+  return yield call(() => new Promise(resolve => setTimeout(() => resolve(result), ms)))
+}
+
+function * handleTrain(api, action) {
+  yield call(api.trainModel, action.modelName, action.dataset)
+  let progress = 1.01
+  while (true) {
+    const model = yield call(api.get, action.modelName)
+    if (model.trained) {
+      yield put(ModelActions.trainSuccess())
+      yield put(ModelActions.updateProgress(1.01))
+      break
+    } else {
+      const percentage = (progress / (progress + 5.0)) * 100
+      console.log(percentage, 'THE PRECENTER')
+      yield put(ModelActions.updateProgress(percentage))
+      console.log("I GET HUR")
+      progress += 1.01
+    }
+    yield call(waitSeconds, 1000)
+  }
 }
 
 function * handlePredict(api, { modelName, dataset }) {

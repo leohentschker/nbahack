@@ -37,6 +37,8 @@ const { Types, Creators } = createActions({
   selectModel: ['activeModel'],
   newModel: ['name'],
 
+  updateProgress: ['trainingProgress'],
+
   saveModel: ['modelName', 'code'],
   saveSuccess: [],
 
@@ -78,6 +80,9 @@ export const reducer = createReducer(INITIAL_STATE, {
     })
     return state.merge({ code, models: newModels })
   },
+
+  [Types.UPDATE_PROGRESS]: (state, { trainingProgress }) =>
+    state.merge({ trainingProgress }),
 
   [Types.FETCH_MODELS]: state =>
     state.merge({ fetching: true }),
