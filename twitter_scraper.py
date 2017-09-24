@@ -31,9 +31,10 @@ class RedditScraper(object):
         endUnix = self.toUnix(endTime)
         team1posts = self.getNumPosts(self.TEAM_SUBREDDITS[team1], startUnix, endUnix)
         team2posts = self.getNumPosts(self.TEAM_SUBREDDITS[team2], startUnix, endUnix)
-        return team1posts + team2posts
+        nbaposts = self.getNumPosts("nba", startUnix, endUnix)
+        return team1posts + team2posts, nbaposts
 
 
 if __name__ == "__main__":
     scraper = RedditScraper()
-    scraper.postsForGame("OKC", "LAL", time)
+    scraper.postsForGame("OKC", "LAL", datetime.datetime.now() - datetime.timedelta(hours=30))
