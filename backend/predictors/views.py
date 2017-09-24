@@ -8,7 +8,10 @@ import string
 import json
 import os
 
-from predictors.models import PredictionModel
+from predictors.models import (
+    PredictionModel,
+    Prediction
+)
 from datasets.models import Dataset
 
 def getFilename():
@@ -50,11 +53,7 @@ def trainModel(request):
 
     model = get_object_or_404(PredictionModel, name=name)
     dataset = get_object_or_404(Dataset, name=datasetName)
-    parameters = model.train(dataset)
-
-    model.parameterJSON = json.dumps(parameters)
-    model.trained = True
-    model.save()
+    model.train(dataset)
     return JsonResponse({})
 
 def predict(request):
@@ -68,7 +67,11 @@ def predict(request):
     model = get_object_or_404(PredictionModel, name=name)
     dataset = get_object_or_404(Dataset, name=datasetName)
 
-    model.predict(dataset)
+    prediction, created = Prediction.objects.get_or_create(model=model, dataset=dataset)
+    predictionResults = model.predict(dataset)
+    prediction.results = json.dumps(predictionResults)
+    prediction.save()
+
     return JsonResponse({})
 
 def listModels(request):

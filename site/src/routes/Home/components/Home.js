@@ -40,10 +40,12 @@ export default class Home extends Component {
         <RankingTable
           prediction={this.props.prediction}
         />
+        {/*
         <h1 className="section-header">SCHEDULE SUGGESTIONS</h1>
         <Schedule
           schedule={this.props.schedule}
         />
+        */}
       </div>
     )
   }
