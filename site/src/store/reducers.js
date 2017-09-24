@@ -3,9 +3,10 @@ import locationReducer from './location'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-    games: require('../redux/games').reducer,
+    data: require('../redux/models').reducer,
+    datasets: require('../redux/datasets').reducer,
     location: locationReducer,
-    ...asyncReducers
+    ...asyncReducers,
   })
 }
 

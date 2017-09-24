@@ -4,16 +4,42 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 
 // internal
+import ModelInput from '../../../components/ModelInput/'
+import RankingTable from '../../../components/RankingTable/'
+import Schedule from '../../../components/Schedule/'
 import './Home.scss'
 
 export default class Home extends Component {
 
-  render () {
+  componentDidMount() {
+    this.props.fetchModels()
+    this.props.fetchDatasets()
+  }
+
+  render() {
     return (
       <div>
-        HOME BIH
+        <ModelInput
+          saveModel={this.props.saveModel}
+          trainModel={this.props.trainModel}
+          activeDataset={this.props.activeDataset}
+          datasets={this.props.datasets}
+          updateCode={this.props.updateCode}
+          code={this.props.code}
+          models={this.props.models}
+          activeModel={this.props.activeModel}
+          selectModel={this.props.selectModel}
+          newModel={this.props.newModel}
+          selectDataset={this.props.selectDataset}
+        />
+        <RankingTable />
+        <Schedule />
       </div>
     )
   }
 }
 
+Home.propTypes = {
+  fetchModels: PropTypes.func.isRequired,
+  saveModel: PropTypes.func.isRequired,
+}

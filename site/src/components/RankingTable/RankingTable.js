@@ -3,20 +3,19 @@ import React, { Component } from 'react'
 import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
 
-// style
-import './Home.scss'
+import './RankingTable.scss'
 
-export default class Home extends Component {
+export default class RankingTable extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props)
+
+    this.state = {}
   }
 
-  render () {
+  render() {
     return (
-      <div>
-      </div>
+      <div id="ranking-table" />
     )
   }
 }
-
