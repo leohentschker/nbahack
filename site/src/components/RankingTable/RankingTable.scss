@@ -9,9 +9,18 @@
 		display: flex;
 		height: 45px;
 
+		.teamspan {
+			width: 75px;
+		}
+
+		.team-text {
+		}
+
 		.table-logo {
 			height: 30px;
+			width: 30px;
 			margin-right: 5px;
+			float: left;
 		}
 	}
 

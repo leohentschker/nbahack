@@ -8,12 +8,16 @@ import './RankingTable.scss'
 const TableElement = ({ team1, team2, date, score, value }) => (
   <div className="table-row">
     <div className="data-elt">
-      <img className="table-logo" src={`/${team1}.png`}/>
-      {team1}
+      <span className="teamspan">
+        <img className="table-logo" src={`/${team1}.png`}/>
+        <span className="team-text">{team1}</span>
+      </span>
     </div>
     <div className="data-elt">
-      <img className="table-logo" src={`/${team2}.png`}/>
-      {team2}
+      <span className="teamspan">
+        <img className="table-logo" src={`/${team2}.png`}/>
+        <span className="team-text">{team2}</span>
+      </span>
     </div>
     <div className="data-elt">{date}</div>
     <div className="data-elt">{score}</div>
