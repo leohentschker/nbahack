@@ -27,13 +27,11 @@ export default class ModelInput extends Component {
           updateCode={this.props.updateCode}
           code={this.props.code}
         />
-        <div
-          className="submit-button"
-          onClick={() => this.props.saveModel(this.state.modelCode)}
-        >
-          WHAT IS GOOD
-        </div>
-        <BottomButtons />
+        <BottomButtons
+          saveModel={this.props.saveModel}
+          code={this.props.code}
+          modelName={this.props.activeModel ? this.props.activeModel.name : null}
+        />
       </div>
     )
   }
@@ -42,6 +40,5 @@ export default class ModelInput extends Component {
 ModelInput.propTypes = {
   selectModel: PropTypes.func.isRequired,
   updateCode: PropTypes.func.isRequired,
-  saveModel: PropTypes.func.isRequired,
   newModel: PropTypes.func.isRequired,
 }

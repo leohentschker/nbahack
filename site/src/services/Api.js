@@ -20,7 +20,7 @@ const create = (baseURL = base) => {
     timeout: 10000,
   })
 
-  const saveModel = (modelCode, modelName) =>
+  const saveModel = (modelName, modelCode) =>
     api.post('model/save/', {
       code: modelCode,
       modelName,

@@ -1,6 +1,7 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
-const DEFAULT_CODE =`class Model:
+
+const DEFAULT_CODE = `class Model:
   """
   Write your code here!
   """
@@ -28,7 +29,7 @@ const { Types, Creators } = createActions({
   selectModel: ['activeModel'],
   newModel: ['name'],
 
-  saveModel: ['code', 'modelName'],
+  saveModel: ['data'],
   saveSuccess: [],
 
   trainModel: ['modelName'],
@@ -64,7 +65,7 @@ export const reducer = createReducer(INITIAL_STATE, {
     state.merge({ models }),
 
   [Types.SELECT_MODEL]: (state, { activeModel }) =>
-    state.merge({ activeModel }),
+    state.merge({ code: activeModel.code, activeModel }),
 
   [Types.NEW_MODEL]: (state, { name }) => {
     const newModel = {

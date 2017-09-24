@@ -5,6 +5,7 @@ class PredictionModel(models.Model):
     name = models.CharField(unique=True, max_length=60)
     code = models.TextField(null=True)
     parameterJSON = models.TextField(null=True)
+    trained = models.BooleanField(default=False)
 
     def train(self):
     	print "I AM GOING TO TRAIN"

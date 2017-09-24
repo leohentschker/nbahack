@@ -17,11 +17,13 @@ def getFilename():
 def saveModel(request):
     try:
         data = json.loads(request.body)
+        print data, "DATA"
         code = str(data["code"])
         name = str(data["modelName"])
     except Exception as e:
         return HttpResponseBadRequest("Invalid submit request")
 
+    print "GONNA SAVE THE MOOODEL", code
     model, created = PredictionModel.objects.get_or_create(name=name)
     model.code = code
     model.save()
@@ -58,5 +60,8 @@ def predict(request):
 
 def listModels(request):
     models = PredictionModel.objects.all()
-    serializedModels = [{"name": model.name, "code": model.code, "id": model.id} for model in models]
+    serializedModels = [
+        {"name": model.name, "code": model.code, "id": model.id, "trained": model.trained}
+        for model in models
+    ]
     return JsonResponse({"models": serializedModels})
