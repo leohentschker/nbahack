@@ -20,8 +20,13 @@ class TrendsScraper(object):
         dates = startString + " " + endString
 
         self.client.build_payload(kw_list=terms, timeframe=dates)
-        print self.client.interest_over_time()
-        return 0
+        interest = self.client.interest_over_time()
+
+        total = 0
+        for _, row in interest.iterrows():
+            for term in terms:
+                total += row.get(term, 0)
+        return total
 
     def postsForGame(self, team1, team2, startTime):
         endDate = startTime + datetime.timedelta(days=1)
