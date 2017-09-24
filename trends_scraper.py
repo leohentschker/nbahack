@@ -3,10 +3,36 @@ from pytrends.request import TrendReq
 
 class TrendsScraper(object):
 
-    TEAM_TERMS = {
-        "LAL": ["lakers"],
-        "OKC": ["Thunder"],
-    }
+    TEAM_TERMS = {'DAL': 'mavericks', 
+                  'DEN': 'denver nuggets', 
+                  'GSW': 'warriors', 
+                  'HOU': 'rockets', 
+                  'LAC': 'LA Clippers', 
+                  'LAL': 'lakers', 
+                  'MEM': 'memphis grizzlies', 
+                  'MIN': 'timberwolves', 
+                  'NOP': 'New Orleans Pelicans', 
+                  'OKC': 'OKC Thunder', 
+                  'PHX': 'suns', 
+                  'POR': 'ripcity', 
+                  'SAC': 'Sacramento kings', 
+                  'SAS': 'San Antonio Spurs', 
+                  'UTA': 'utah jazz', 
+                  'ATL': 'atlanta hawks', 
+                  'BOS': 'boston celtics', 
+                  'BKN': 'brooklyn nets', 
+                  'CHA': 'charlotte hornets', 
+                  'CHI': 'chicago bulls', 
+                  'CLE': 'cleveland cavs', 
+                  'DET': 'detroitpistons', 
+                  'IND': 'pacers', 
+                  'MIA': 'heat', 
+                  'MIL': 'milwaukee bucks', 
+                  'NYK': 'ny knicks', 
+                  'ORL': 'orlando magic', 
+                  'PHI': 'sixers', 
+                  'TORONTO': 'toronto raptors', 
+                  'WAS': 'washington wizards'}
 
     def __init__(self):
         self.client = TrendReq()
