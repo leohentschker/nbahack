@@ -7,8 +7,9 @@ class PredictionModel(models.Model):
     parameterJSON = models.TextField(null=True)
     trained = models.BooleanField(default=False)
 
-    def train(self):
+    def train(self, dataset):
     	print "I AM GOING TO TRAIN"
+    	return {}
 
     def predict(self, dataset):
     	print "I AM GOING TO PREDICT", dataset

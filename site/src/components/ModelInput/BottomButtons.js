@@ -6,7 +6,6 @@ import swal from 'sweetalert2'
 import './BottomButtons.scss'
 
 const SaveButton = ({ saveModel, modelName, code }) => {
-  console.log(modelName, "MODEL NAME HERE")
   return (
     <div
       id="save-button"
@@ -27,7 +26,7 @@ const SaveButton = ({ saveModel, modelName, code }) => {
   )
 }
 
-const TrainButton = (trainModel, datasetName, modelName) => (
+const TrainButton = ({ trainModel, datasetName, modelName }) => (
   <div
     id="train-button"
     className="bottom-button"
@@ -39,7 +38,7 @@ const TrainButton = (trainModel, datasetName, modelName) => (
   </div>
 )
 
-const PredictButton = (predictModel, modelName, datasetName) => (
+const PredictButton = ({ predictModel, modelName, datasetName }) => (
   <div
     id="predict-button"
     className="bottom-button"
@@ -59,7 +58,11 @@ const BottomButtons = (props) => {
         code={props.code}
         modelName={props.modelName}
       />
-      <TrainButton />
+      <TrainButton
+        trainModel={props.trainModel}
+        modelName={props.modelName}
+        datasetName={props.datasetName}
+      />
       <PredictButton />
     </div>
   )
@@ -67,6 +70,7 @@ const BottomButtons = (props) => {
 
 BottomButtons.propTypes = {
   saveModel: PropTypes.func.isRequired,
+  trainModel: PropTypes.func.isRequired,
 }
 
 export default BottomButtons

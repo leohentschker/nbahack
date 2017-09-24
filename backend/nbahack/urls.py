@@ -36,8 +36,8 @@ urlpatterns = [
     url(r'^model/$', csrf_exempt(listModels)),
     url(r'^model/save/', csrf_exempt(saveModel)),
     url(r'^model/predict/', csrf_exempt(predict)),
+    url(r'^model/train/$', csrf_exempt(trainModel)),
     url(r'^model/(?P<name>\w{0,50})/$', csrf_exempt(getModel)),
-    url(r'^model/train/(?P<name>\w{0,50})/$', trainModel),
 
     url(r'^datasets/$', csrf_exempt(listDatasets)),
 ]

@@ -21,6 +21,7 @@ export default class Home extends Component {
       <div>
         <ModelInput
           saveModel={this.props.saveModel}
+          trainModel={this.props.trainModel}
           activeDataset={this.props.activeDataset}
           datasets={this.props.datasets}
           updateCode={this.props.updateCode}

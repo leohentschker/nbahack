@@ -11,7 +11,8 @@ const mapDispatchToProps = dispatch => ({
   selectModel: model => dispatch(ModelActionCreators.selectModel(model)),
   fetchModels: () => dispatch(ModelActionCreators.fetchModels()),
   updateCode: code => dispatch(ModelActionCreators.updateCode(code)),
-  saveModel: code => dispatch(ModelActionCreators.saveModel(code)),
+  saveModel: (modelName, code) => dispatch(ModelActionCreators.saveModel(modelName, code)),
+  trainModel: (modelName, dataset) => dispatch(ModelActionCreators.trainModel(modelName, dataset)),
   newModel: name => dispatch(ModelActionCreators.newModel(name)),
 
   fetchDatasets: () => dispatch(DatasetActionCreators.fetchDatasets()),

@@ -29,10 +29,10 @@ const { Types, Creators } = createActions({
   selectModel: ['activeModel'],
   newModel: ['name'],
 
-  saveModel: ['data'],
+  saveModel: ['modelName', 'code'],
   saveSuccess: [],
 
-  trainModel: ['modelName'],
+  trainModel: ['modelName', 'dataset'],
   trainSuccess: [],
 
   codeError: ['codeError'],

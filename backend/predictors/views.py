@@ -9,6 +9,7 @@ import json
 import os
 
 from predictors.models import PredictionModel
+from datasets.models import Dataset
 
 def getFilename():
     name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
@@ -39,10 +40,18 @@ def getModel(request, name=None):
     model = get_object_or_404(PredictionModel, name=name)
     return JsonResponse({"code": model.code})
 
-def trainModel(request, name=None):
+def trainModel(request):
+    try:
+        data = json.loads(request.body)
+        name = str(data["modelName"])
+        datasetName = str(data["dataset"])
+    except Exception as e:
+        return HttpResponseBadRequest("Invalid prediction request")
     model = get_object_or_404(PredictionModel, name=name)
-    parameters = model.train()
+    dataset = get_object_or_404(Dataset, name=datasetName)
+    parameters = model.train(dataset)
     model.parameterJSON = json.dumps(parameters)
+    model.trained = True
     model.save()
     return JsonResponse({})
 
@@ -50,11 +59,13 @@ def predict(request):
     try:
         data = json.loads(request.body)
         name = str(data["modelName"])
-        dataset = data["trainingSet"]
+        datasetName = str(data["dataset"])
     except Exception as e:
         return HttpResponseBadRequest("Invalid prediction request")
 
-    model = get_object_or_404(PredictionModel.objects, name=name)
+    model = get_object_or_404(PredictionModel, name=name)
+    dataset = get_object_or_404(Dataset, name=datasetName)
+
     model.predict(dataset)
     return JsonResponse({})
 

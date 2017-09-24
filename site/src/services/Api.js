@@ -27,6 +27,13 @@ const create = (baseURL = base) => {
     })
       .then(resp => resp.data)
 
+  const trainModel = (modelName, dataset) =>
+    api.post('model/train/', {
+      modelName,
+      dataset,
+    })
+      .then(resp => resp.data)
+
   const list = () =>
     api.get(`model/`)
       .then(resp => resp.data.models)
@@ -41,6 +48,7 @@ const create = (baseURL = base) => {
 
   return {
     listDatasets,
+    trainModel,
     saveModel,
     list,
     get,
