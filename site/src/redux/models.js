@@ -2,21 +2,29 @@ import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
 const DEFAULT_CODE = `class Model:
-  """
-  Write your code here!
-  """
-
-  def train(self, dataframe):
     """
-    Takes in dataframe containing all
-    of the relevant data we will need
+    Write your code here!
     """
 
-  def predict(self, data):
-    """
-    Takes in the data for an upcoming game
-    and makes a guess as to the value
-    """
+    def train(self, dataframe):
+        """
+        Takes in dataframe containing all
+        of the relevant data we will need
+        """
+
+    def predict(self, data):
+        """
+        Takes in the data for an upcoming game
+        and makes a guess as to the value
+        """
+
+    @classmethod
+    def from_parameters(params):
+        """
+        Instantiates a trained model
+        from parameters
+        """
+        return Model()
 `
 
 /* ------------- Types and Action Creators ------------- */
@@ -49,6 +57,7 @@ const INITIAL_STATE = Immutable({
   activeModel: null,
   saving: false,
   training: false,
+  trainingProgress: 1.01,
   models: [],
   datasets: [],
   codeError: null,
@@ -57,8 +66,18 @@ const INITIAL_STATE = Immutable({
 
 /* ------------- Reducer ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.UPDATE_CODE]: (state, { code }) =>
-    state.merge({ code }),
+  [Types.UPDATE_CODE]: (state, { code }) => {
+    const newModels = state.models.asMutable().map(m => {
+      if (m.id === state.activeModel.id) {
+        const newModel = m.asMutable()
+        newModel.code = code
+        return newModel
+      } else {
+        return m
+      }
+    })
+    return state.merge({ code, models: newModels })
+  },
 
   [Types.FETCH_MODELS]: state =>
     state.merge({ fetching: true }),

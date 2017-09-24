@@ -24,6 +24,8 @@ const mapStateToProps = state => ({
   activeDataset: state.datasets.activeDataset,
   datasets: state.datasets.datasets,
 
+  trainingProgress: state.data.trainingProgress,
+  training: state.data.training,
   activeModel: state.data.activeModel,
   models: state.data.models,
   code: state.data.code,

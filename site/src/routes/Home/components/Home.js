@@ -1,9 +1,10 @@
 // external
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import FontAwesome from 'react-fontawesome'
+import Modal from 'react-awesome-modal'
 
 // internal
+import TrainingAnimation from '../../../components/TrainingAnimation/'
 import ModelInput from '../../../components/ModelInput/'
 import RankingTable from '../../../components/RankingTable/'
 import Schedule from '../../../components/Schedule/'
@@ -19,6 +20,17 @@ export default class Home extends Component {
   render() {
     return (
       <div>
+        <Modal 
+            visible={this.props.training}
+            width="785"
+            height="350"
+            effect="fadeInUp"
+        >
+          <TrainingAnimation
+            visible={this.props.visible}
+            trainingProgress={this.props.trainingProgress}
+          />
+        </Modal>
         <div className="logo-header">
           <img src="/ISE.png" />
         </div>
@@ -40,10 +52,12 @@ export default class Home extends Component {
         <RankingTable
           prediction={this.props.prediction}
         />
+        {/*
         <h1 className="section-header">SCHEDULE SUGGESTIONS</h1>
         <Schedule
           schedule={this.props.schedule}
         />
+        */}
       </div>
     )
   }

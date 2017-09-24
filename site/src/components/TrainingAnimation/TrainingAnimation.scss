@@ -6,11 +6,16 @@
 
 		.court-background {
 			height: 350px;
+			width: 785px;
 		}
 	}
 
+	.training-warning {
+		font-size: 45px;
+		color: #3FCAC8;
+	}
+
 	.content-wrapper {
-		height: 350px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
