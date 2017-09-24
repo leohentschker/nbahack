@@ -30,6 +30,7 @@ export default class ModelInput extends Component {
         <BottomButtons
           saveModel={this.props.saveModel}
           trainModel={this.props.trainModel}
+          predictModel={this.props.predictModel}
           code={this.props.code}
           modelName={this.props.activeModel ? this.props.activeModel.name : null}
           datasetName={this.props.activeDataset ? this.props.activeDataset.name : null}
