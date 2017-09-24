@@ -20,13 +20,16 @@ function * handleFetch(api) {
 }
 
 function * handleTrain(api, { modelName, dataset }) {
-  console.log("TRAINING THE MODEL", modelName, dataset, "THAT WAS IT")
   yield call(api.trainModel, modelName, dataset)
+}
+
+function * handlePredict(api, { modelName, dataset }) {
+  yield call(api.predictModel, modelName, dataset)
 }
 
 export default function * flow(api) {
   yield takeEvery(ModelTypes.SAVE_MODEL, handleSave, api)
   yield takeEvery(ModelTypes.FETCH_MODELS, handleFetch, api)
-  console.log("WELL L")
   yield takeEvery(ModelTypes.TRAIN_MODEL, handleTrain, api)
+  yield takeEvery(ModelTypes.PREDICT_MODEL, handlePredict, api)
 }

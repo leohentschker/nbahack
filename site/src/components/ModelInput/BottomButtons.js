@@ -43,7 +43,7 @@ const PredictButton = ({ predictModel, modelName, datasetName }) => (
     id="predict-button"
     className="bottom-button"
     role="button"
-    onClick={() => predict(modelName, datasetName)}
+    onClick={() => predictModel(modelName, datasetName)}
   >
     <FontAwesome name="clipboard" className="fa-button" />
     PREDICT
@@ -63,7 +63,11 @@ const BottomButtons = (props) => {
         modelName={props.modelName}
         datasetName={props.datasetName}
       />
-      <PredictButton />
+      <PredictButton
+        predictModel={props.predictModel}
+        modelName={props.modelName}
+        datasetName={props.datasetName}
+      />
     </div>
   )
 }
