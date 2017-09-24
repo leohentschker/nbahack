@@ -36,10 +36,14 @@ export default class Home extends Component {
           newModel={this.props.newModel}
           selectDataset={this.props.selectDataset}
         />
+        <h1 className="section-header">MODEL RESULTS</h1>
         <RankingTable
-          predictions={this.props.predictions}
+          prediction={this.props.prediction}
         />
-        <Schedule />
+        <h1 className="section-header">SCHEDULE SUGGESTIONS</h1>
+        <Schedule
+          schedule={this.props.schedule}
+        />
       </div>
     )
   }

@@ -1,0 +1,36 @@
+#ranking-table {
+
+	font-size: 16px;
+
+	.data-elt {
+		flex: 1;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		height: 45px;
+
+		.table-logo {
+			height: 30px;
+			margin-right: 5px;
+		}
+	}
+
+	.table-header {
+		font-weight: 600;
+		background: #fafafa;
+		flex-direction: row;
+		display: flex;
+	}
+
+	.table-row {
+		flex-direction: row;
+		display: flex;
+	    border-bottom: 1px solid #ddd;
+	    cursor: pointer;
+
+		&:hover {
+			background: #fafafa;
+		}
+	}
+	margin: 30px;
+}

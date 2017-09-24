@@ -27,6 +27,8 @@ const mapStateToProps = state => ({
   activeModel: state.data.activeModel,
   models: state.data.models,
   code: state.data.code,
+
+  prediction: state.predictions.prediction,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
