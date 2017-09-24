@@ -36,6 +36,8 @@ const TEAMS = [
   'TOR',
 ]
 
+const randTeam = () => TEAMS[Math.floor(Math.random() * TEAMS.length)]
+
 const EmptyAnimation = () => (
   <div className="empty-animation">
     <img className="logo" src="/logo.png" />
@@ -76,36 +78,30 @@ export default class TrainingAnimation extends Component {
       team1: null,
       team2: null,
     }
-    this.cycleImages = this.cycleImages.bind(this)
+
+    this.timer = this.timer.bind(this)
   }
 
   componentDidMount() {
-    this.cycleImages()
+    const intervalId = setInterval(this.timer, 200)
+    this.setState({intervalId: intervalId})
   }
 
-  randTeam() {
-    return TEAMS[Math.floor(Math.random() * TEAMS.length)]
-  }
-
-  cycleImages() {
+  timer() {
     this.setState({
-      team1: this.randTeam(),
-      team2: this.randTeam(),
+      team1: randTeam(),
+      team2: randTeam(),
     })
-    if (this.props.visible) {
-      setTimeout(this.cycleImages, 500)
-    }
   }
 
   render() {
-    console.log(this.props.trainingProgress, "THE PPPOP")
     return (
       <div id="court-animation">
         <div className="image-wrapper">
           <img className="court-background" src="/Court.png" />
         </div>
         <div className="training-warning">
-          Training...
+          {this.props.title}
         </div>
         <div className="content-wrapper">
           {

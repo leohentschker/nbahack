@@ -46,6 +46,7 @@ const { Types, Creators } = createActions({
   trainSuccess: [],
 
   predictModel: ['modelName', 'dataset'],
+  predictSuccess: [],
 
   codeError: ['codeError'],
   success: [],
@@ -60,6 +61,7 @@ const INITIAL_STATE = Immutable({
   saving: false,
   training: false,
   trainingProgress: 1.01,
+  predicting: false,
   models: [],
   datasets: [],
   codeError: null,
@@ -105,7 +107,11 @@ export const reducer = createReducer(INITIAL_STATE, {
     })
   },
 
-  [Types.PREDICT_MODEL]: state => state,
+  [Types.PREDICT_MODEL]: state =>
+    state.merge({ predicting: true }),
+
+  [Types.PREDICT_SUCCESS]: state =>
+    state.merge({ predicting: false }),
 
   [Types.SAVE_MODEL]: state =>
     state.merge({ saving: true }),

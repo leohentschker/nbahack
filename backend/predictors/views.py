@@ -70,10 +70,9 @@ def predict(request):
     dataset = get_object_or_404(Dataset, name=datasetName)
 
     prediction, created = Prediction.objects.get_or_create(model=model, dataset=dataset)
-    predictionResults = model.predict(dataset)
-    prediction.results = json.dumps(predictionResults)
+    prediction.complete = False
     prediction.save()
-
+    model.predict_async(dataset)
     return JsonResponse({})
 
 def listModels(request):
@@ -83,3 +82,22 @@ def listModels(request):
         for model in models
     ]
     return JsonResponse({"models": serializedModels})
+
+def fetchPrediction(request):
+    try:
+        data = json.loads(request.body)
+        name = str(data["modelName"])
+        datasetName = str(data["dataset"])
+    except Exception as e:
+        return HttpResponseBadRequest("Invalid prediction request")
+
+    model = get_object_or_404(PredictionModel, name=name)
+    dataset = get_object_or_404(Dataset, name=datasetName)
+
+    prediction = get_object_or_404(Prediction, model=model, dataset=dataset)
+    
+    return JsonResponse({
+        "complete": prediction.complete,
+        "results": [],
+        "id": prediction.id,
+    })
