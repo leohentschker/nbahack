@@ -11,6 +11,9 @@ export const DatasetTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
+
+const randomValue = () => Math.random() * 5
+
 const DEFAULT_PREDICTION = {
   results: [
     {
@@ -18,28 +21,28 @@ const DEFAULT_PREDICTION = {
       team2: 'ATL',
       date: '12/12/17',
       score: '110-150',
-      value: 10.2,
+      value: randomValue(),
     },
     {
       team1: 'NYK',
       team2: 'LAL',
       date: '12/12/17',
       score: '110-150',
-      value: 20.12,
+      value: randomValue(),
     },
     {
       team1: 'LAL',
       team2: 'MEM',
       date: '12/12/17',
       score: '110-150',
-      value: 10.2,
+      value: randomValue(),
     },
     {
       team1: 'LAC',
       team2: 'PHI',
       date: '12/12/17',
       score: '110-150',
-      value: 30.12,
+      value: randomValue(),
     },
   ],
 }

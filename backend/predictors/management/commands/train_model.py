@@ -14,5 +14,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         model = PredictionModel.objects.get(id=options["model_id"])
         dataset = Dataset.objects.get(id=options["dataset_id"])
-        time.sleep(2)
+        time.sleep(4)
         model.train(dataset)

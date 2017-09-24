@@ -21,7 +21,7 @@ const TableElement = ({ team1, team2, date, score, value }) => (
     </div>
     <div className="data-elt">{date}</div>
     <div className="data-elt">{score}</div>
-    <div className="data-elt">{value}</div>
+    <div className="data-elt">{value.toFixed(3)}</div>
   </div>
 )
 

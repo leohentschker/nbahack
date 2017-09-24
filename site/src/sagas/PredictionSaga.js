@@ -25,13 +25,13 @@ function * fetchPrediction(api) {
 
   if (modelName != null && datasetName != null) {
     const output = yield call(api.fetchPrediction, modelName, datasetName)
-    if (output) {
-      yield put(PredictionActions.setPrediction(output))
-    }
+    // if (output) {
+    //   yield put(PredictionActions.setPrediction(output))
+    // }
   }
 }
 
-function* waitSeconds(ms, result=true) {
+function* waitSeconds(ms, result = true) {
   return yield call(() => new Promise(resolve => setTimeout(() => resolve(result), ms)))
 }
 
@@ -57,5 +57,5 @@ function * handlePredict(api, { modelName, dataset }) {
 export default function * flow(api) {
   yield takeLatest(DatasetTypes.SELECT_DATASET, fetchPrediction, api)
   yield takeLatest(ModelTypes.SELECT_MODEL, fetchPrediction, api)
-  yield takeLatest(ModelTypes.PREDICT_MODEL, handlePredict, api)
+  // yield takeLatest(ModelTypes.PREDICT_MODEL, handlePredict, api)
 }

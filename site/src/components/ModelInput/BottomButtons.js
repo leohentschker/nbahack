@@ -15,7 +15,7 @@ const SaveButton = ({ saveModel, modelName, code }) => {
         saveModel(modelName, code)
         swal(
           'Success',
-          'Model saved successfully',
+          'Model saved',
           'success',
         )
       }}
