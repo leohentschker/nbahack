@@ -46,6 +46,8 @@ class PredictionModel(models.Model):
         self.parameterJSON = json.dumps(parameters)
         self.trained = True
         self.save()
+        import time
+        time.sleep(10)
 
     def predict(self, dataset):
     	return self.model.predict(dataset.dataframe)

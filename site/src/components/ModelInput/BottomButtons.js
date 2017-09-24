@@ -12,7 +12,7 @@ const SaveButton = ({ saveModel, modelName, code }) => {
       className="bottom-button"
       role="button"
       onClick={() => {
-        saveModel({ modelName, code })
+        saveModel(modelName, code)
         swal(
           'Success',
           'Model saved successfully',
